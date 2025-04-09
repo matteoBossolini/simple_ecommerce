@@ -58,7 +58,6 @@ function addProductToCart(productId) {
     if (!cart.includes(product)) {
       cart.push(product);
     }
-    console.log(cart);
   }
 }
 
@@ -99,9 +98,9 @@ function decreaseQuantity(productId) {
 function removeProductFromCart(productId) {
   const product = products.find(p => p.productId === productId);
   if (product) {
-    product.quantity = 0;
     const productIndex = cart.indexOf(product);
     if (productIndex > -1) {
+      product.quantity = 0;
       cart.splice(productIndex, 1);
     }
   }
@@ -128,11 +127,15 @@ function emptyCart() {
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-
+let totalPaid = 0;
 function pay(amount) {
   const total = cartTotal();
-  const change = amount - total;
-  return change;
+  totalPaid += amount;
+  const remainingBalance = totalPaid - total;
+  if (remainingBalance > 0) {
+    totalPaid = 0;
+  }
+  return remainingBalance;
 }
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/

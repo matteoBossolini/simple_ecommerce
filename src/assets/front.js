@@ -67,8 +67,6 @@ document.querySelector('.products').addEventListener('click', (e) => {
     let productId = e.target.parentNode.getAttribute('data-productId');
     productId *= 1;
     addProductToCart(productId);
-    console.log(cart);
-    console.log(products);
     drawCart();
     drawCheckout();
 });
